@@ -1,28 +1,25 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {StartPage} from "./src/UI/StartPage";
+import {Provider} from 'react-redux'
+import store from "./src/BLL/store";
 
 export default function App() {
 
-  let [value, setValue] = useState('новый текст')
 
-  return (
-    <View style={styles.container}>
-      <TextInput
-          style={{width: 40}}
-          placeholder={'Type here.'}
-          value={value}
-          onChangeText={(text) => setValue(text)}
-      />
-      <Text style={{padding: 10, fontSize: 25}}>{value}</Text>
-    </View>
-  );
+    return (
+        <Provider store={store}>
+            <View style={styles.container}>
+                <StartPage title={'GO'}/>
+            </View>
+        </Provider>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });
