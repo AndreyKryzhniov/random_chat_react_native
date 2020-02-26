@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import {Button, StyleSheet, View, ActivityIndicator} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserTC, setUserTC} from '../BLL/usersReducer';
-import { AppStateType } from '../BLL/store';
-import {ChatPage} from "./ChatPage";
+import {getUserTC, setUserTC} from '../../BLL/usersReducer';
+import { AppStateType } from '../../BLL/store';
+import {ChatPage} from "../ChatPage/ChatPage";
 
 interface IProps {
     title: string
@@ -33,7 +33,7 @@ export const StartPage = (props: IProps) => {
     return (
         <View style={styles.container}>
             {
-                isFetching ? <ActivityIndicator size="large" color="#0000ff" /> : <Button title={props.title} onPress={startSearching}/>
+                isFetching ? <ActivityIndicator size={80} color="#0000ff" /> : <Button title={props.title} color={'#767aa6'} onPress={startSearching}/>
             }
         </View>
     )
@@ -41,7 +41,7 @@ export const StartPage = (props: IProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        // width: '60%',
+        width: '65%',
         justifyContent: 'center',
         alignContent: 'center'
     },
