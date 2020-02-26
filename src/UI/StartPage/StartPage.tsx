@@ -11,8 +11,8 @@ interface IProps {
 
 export const StartPage = (props: IProps) => {
 
-    let {isFetching, chatId, isLoading} = useSelector((store: AppStateType) => store.users)
-    const dispatch = useDispatch()
+    let {isFetching, chatId, isLoading} = useSelector((store: AppStateType) => store.users);
+    const dispatch = useDispatch();
 
     const startSearching = () => {
         dispatch(setUserTC())
@@ -24,7 +24,7 @@ export const StartPage = (props: IProps) => {
                 dispatch(getUserTC())
             }, 1500)
         }
-    }, [isFetching, isLoading])
+    }, [isFetching, isLoading]);
 
     if (chatId) {
         return <ChatPage/>
@@ -33,7 +33,7 @@ export const StartPage = (props: IProps) => {
     return (
         <View style={styles.container}>
             {
-                isFetching ? <ActivityIndicator size={80} color="#0000ff" /> : <Button title={props.title} color={'#767aa6'} onPress={startSearching}/>
+                isFetching ? <ActivityIndicator size={80} color="#0D58A6" /> : <Button title={props.title} color={'#0D58A6'} onPress={startSearching}/>
             }
         </View>
     )

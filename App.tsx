@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {StartPage} from "./src/UI/StartPage/StartPage";
 import {Provider} from 'react-redux'
 import store from "./src/BLL/store";
-// import {ChatPage} from "./src/UI/ChatPage/ChatPage";
+
 
 export default function App() {
 
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#bcbda6'
+        backgroundColor: '#689CD2'
     },
 });

@@ -15,11 +15,26 @@ export const Message = (props) => {
 
 const styles = StyleSheet.create({
     my_message: {
-        backgroundColor: 'black',
-        color: 'white'
+        backgroundColor: '#65A6d1',
+        color: 'white',
+        borderBottomColor: '#062170',
+        borderBottomWidth: 1,
+        height: '100%',
+        fontSize: 22,
+        textAlign: 'right',
+        paddingRight: 10,
+        paddingBottom: 5
     },
     message_friend: {
-        backgroundColor: 'white',
-        color: 'black'
+        backgroundColor: '#3e97d1',
+        color: 'black',
+        borderBottomColor: '#062170',
+        borderBottomWidth: 1,
+        height: '100%',
+        fontSize: 22,
+        textAlign: 'left',
+        paddingLeft: 10,
+        paddingBottom: 5
+
     }
 })

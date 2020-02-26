@@ -6,21 +6,21 @@ import {AppStateType} from "../../BLL/store";
 import {Message} from "../Message";
 
 export const ChatPage = () => {
-    let {chatId, messages, isLoading, userId} = useSelector((store: AppStateType) => store.users)
-    const [value, setValue] = useState('')
-    const dispatch = useDispatch()
+    let {chatId, messages, isLoading, userId} = useSelector((store: AppStateType) => store.users);
+    const [value, setValue] = useState('');
+    const dispatch = useDispatch();
     const ref = React.createRef<FlatList<any>>();
 
     const logOutOfChat = () => {
         dispatch(sendMessageTC('1qaz2wsx3edc'))
-    }
+    };
 
     useEffect(() => {
         if (chatId && !isLoading)
             setTimeout(() => {
                 dispatch(getMessagesTC())
             }, 1500)
-    }, [isLoading, chatId])
+    }, [isLoading, chatId]);
 
     useEffect(() => {
         setTimeout(() => ref.current.scrollToEnd(), 100)
@@ -28,7 +28,7 @@ export const ChatPage = () => {
 
     const sendMessage = () => {
         if (!(value.length === 0)) {
-            setValue('')
+            setValue('');
             dispatch(sendMessageTC(value))
         } else {
             Alert.alert('Вы попытались отправить пустое сообщение')
@@ -38,7 +38,7 @@ export const ChatPage = () => {
     return (
         <View style={styles.container}>
             <View style={styles.button_out}>
-                <Button title={'UOT'} onPress={logOutOfChat}/>
+                <Button title={'UOT'} onPress={logOutOfChat} color={'#0D58A6'}/>
             </View>
             <View style={styles.list}>
                 <FlatList
@@ -54,7 +54,7 @@ export const ChatPage = () => {
                     value={value}
                     placeholder={'Введите сообщение...'}
                     onChangeText={setValue}/>
-                <Button title={'SEND'} onPress={sendMessage}/>
+                <Button title={'SEND'} onPress={sendMessage} color={'#0D58A6'}/>
             </View>
         </View>
     )
@@ -88,6 +88,11 @@ const styles = StyleSheet.create({
         onBlur: false
     },
     list: {
-        height: '40%'
+        height: '80%',
+        borderTopColor: '0D58A6',
+        borderTopWidth: 1,
+        borderBottomColorColor: '0D58A6',
+        borderBottomWidth: 1,
+        width: '100%'
     }
 });
