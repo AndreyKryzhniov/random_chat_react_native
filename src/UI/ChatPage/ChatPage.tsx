@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, Button, FlatList, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {sendMessageTC, getMessagesTC} from "../../BLL/usersReducer";
 import {AppStateType} from "../../BLL/store";
@@ -43,7 +43,7 @@ export const ChatPage = () => {
         }
     }
 
-    let messagesArray = messages.map(m => m)
+    // let messagesArray = messages.map(m => m)
 
 
     return (
@@ -51,10 +51,13 @@ export const ChatPage = () => {
             <View style={styles.button_out}>
                 <Button title={'UOT'} onPress={logOutOfChat}/>
             </View>
-            <FlatList
-                keyExtractor={(item, index) => index.toString()}
-                data={messagesArray}
-                renderItem={(item) => <Message item={item}/>}/>
+            <View style={styles.list}>
+                <FlatList
+                    keyExtractor={(item, index) => index.toString()}
+                    data={messages}
+                    renderItem={(item) => <Message messageObj={item} userId={userId}/>}
+                />
+            </View>
             <View style={styles.footer}>
                 <TextInput
                     style={styles.input}
@@ -94,5 +97,8 @@ const styles = StyleSheet.create({
         borderBColorColor: '#3949ab',
         marginRight: 10,
         onBlur: false
+    },
+    list: {
+        height: '40%'
     }
 });
