@@ -5,23 +5,11 @@ import {sendMessageTC, getMessagesTC} from "../../BLL/usersReducer";
 import {AppStateType} from "../../BLL/store";
 import {Message} from "../Message";
 
-interface IMessage {
-    message: string,
-    id: number
-}
-
-interface IMessages {
-    messages: IMessage[]
-}
-
-
 export const ChatPage = () => {
-
     let {chatId, messages, isLoading, userId} = useSelector((store: AppStateType) => store.users)
-
     const [value, setValue] = useState('')
-
     const dispatch = useDispatch()
+    const ref = React.createRef<FlatList<any>>();
 
     const logOutOfChat = () => {
         dispatch(sendMessageTC('1qaz2wsx3edc'))
@@ -34,6 +22,10 @@ export const ChatPage = () => {
             }, 1500)
     }, [isLoading, chatId])
 
+    useEffect(() => {
+        setTimeout(() => ref.current.scrollToEnd(), 100)
+    }, [messages])
+
     const sendMessage = () => {
         if (!(value.length === 0)) {
             setValue('')
@@ -43,9 +35,6 @@ export const ChatPage = () => {
         }
     }
 
-    // let messagesArray = messages.map(m => m)
-
-
     return (
         <View style={styles.container}>
             <View style={styles.button_out}>
@@ -53,6 +42,7 @@ export const ChatPage = () => {
             </View>
             <View style={styles.list}>
                 <FlatList
+                    ref={ref}
                     keyExtractor={(item, index) => index.toString()}
                     data={messages}
                     renderItem={(item) => <Message messageObj={item} userId={userId}/>}
@@ -69,7 +59,6 @@ export const ChatPage = () => {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     container: {

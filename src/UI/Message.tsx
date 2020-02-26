@@ -7,7 +7,7 @@ export const Message = (props) => {
     return (
         <View>
             <Text style={props.userId === props.messageObj.item.userId ? styles.my_message : styles.message_friend}>
-                {props.messageObj.item.message}xxx
+                {props.messageObj.item.message}
             </Text>
         </View>
     )
