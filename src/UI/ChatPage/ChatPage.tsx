@@ -83,15 +83,14 @@ const styles = StyleSheet.create({
         padding: 5,
         borderStyle: 'solid',
         borderBottomWidth: 2,
-        borderBColorColor: '#3949ab',
-        marginRight: 10,
-        onBlur: false
+        borderBottomColor: '#3949ab',
+        marginRight: 10
     },
     list: {
         height: '80%',
-        borderTopColor: '0D58A6',
+        borderTopColor: '#0D58A6',
         borderTopWidth: 1,
-        borderBottomColorColor: '0D58A6',
+        borderBottomColor: '#0D58A6',
         borderBottomWidth: 1,
         width: '100%'
     }
