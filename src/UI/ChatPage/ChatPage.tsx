@@ -1,5 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {
+    Alert,
+    Button,
+    FlatList,
+    KeyboardAvoidingView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View
+} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {sendMessageTC, getMessagesTC} from "../../BLL/usersReducer";
 import {AppStateType} from "../../BLL/store";
@@ -36,27 +46,27 @@ export const ChatPage = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.button_out}>
+        <KeyboardAvoidingView behavior="padding" enabled>
+            <View  style={styles.container}><View style={styles.button_out}>
                 <Button title={'UOT'} onPress={logOutOfChat} color={'#0D58A6'}/>
             </View>
-            <View style={styles.list}>
-                <FlatList
-                    ref={ref}
-                    keyExtractor={(item, index) => index.toString()}
-                    data={messages}
-                    renderItem={(item) => <Message messageObj={item} userId={userId}/>}
-                />
-            </View>
-            <View style={styles.footer}>
-                <TextInput
-                    style={styles.input}
-                    value={value}
-                    placeholder={'Введите сообщение...'}
-                    onChangeText={setValue}/>
-                <Button title={'SEND'} onPress={sendMessage} color={'#0D58A6'}/>
-            </View>
-        </View>
+                <View style={styles.list}>
+                    <FlatList
+                        ref={ref}
+                        keyExtractor={(item, index) => index.toString()}
+                        data={messages}
+                        renderItem={(item) => <Message messageObj={item} userId={userId}/>}
+                    />
+                </View>
+                <View style={styles.footer}>
+                    <TextInput
+                        style={styles.input}
+                        value={value}
+                        placeholder={'Введите сообщение...'}
+                        onChangeText={setValue}/>
+                    <Button title={'SEND'} onPress={sendMessage} color={'#0D58A6'}/>
+                </View></View>
+        </KeyboardAvoidingView>
     )
 }
 
