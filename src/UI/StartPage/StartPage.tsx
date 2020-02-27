@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Button, StyleSheet, View, ActivityIndicator} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserTC, setUserTC} from '../../BLL/usersReducer';
+import {getUserTC, postUser, setUserTC} from '../../BLL/usersReducer';
 import { AppStateType } from '../../BLL/store';
 import {ChatPage} from "../ChatPage/ChatPage";
 
@@ -16,6 +16,9 @@ export const StartPage = (props: IProps) => {
 
     const startSearching = () => {
         dispatch(setUserTC())
+    }
+    const stop = () => {
+        dispatch(postUser(0, 'stop'))
     }
 
     useEffect(() => {
@@ -33,7 +36,15 @@ export const StartPage = (props: IProps) => {
     return (
         <View style={styles.container}>
             {
-                isFetching ? <ActivityIndicator size={80} color="#0D58A6" /> : <Button title={props.title} color={'#0D58A6'} onPress={startSearching}/>
+                isFetching
+                    ? (
+                        <View style={styles.fetchingContainer}>
+                            <ActivityIndicator size={80} color="#0D58A6" />
+                            <Button title={'Stop'} onPress={stop}/>
+                        </View>
+
+                    )
+                    : <Button title={props.title} color={'#0D58A6'} onPress={startSearching}/>
             }
         </View>
     )
@@ -42,7 +53,13 @@ export const StartPage = (props: IProps) => {
 const styles = StyleSheet.create({
     container: {
         width: '65%',
+        height: '100%',
         justifyContent: 'center',
         alignContent: 'center'
     },
+    fetchingContainer: {
+        height: '60%',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+    }
 });

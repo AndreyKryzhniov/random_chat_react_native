@@ -87,7 +87,7 @@ const usersReducer = (state: IUserState = initialState, action: IActions): IUser
 }
 
 
-const postUser = (userId: number, status: string): IActionSetUser => ({type: SET_USER, userId, status})
+export const postUser = (userId: number, status: string): IActionSetUser => ({type: SET_USER, userId, status})
 const setIsLoading = (isLoading: boolean): IActionUserSetIsLoading => ({type: SET_IS_LOADING, isLoading})
 const setUserInChat = (status: string, chatId: number): IActionUserSetInChat => ({
     type: SET_USER_IN_CHAT,
@@ -101,20 +101,22 @@ const setMessages = (status: string, messages: IMessage[]): IActionUserSetMessag
 })
 
 export const setUserTC = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch, getState: () => AppStateType) => {
         dispatch(postUser(0, 'wait'))
         api.setUser().then(response => {
-            dispatch(postUser(response.data.userId, response.data.status))
+            getState().users.isFetching && dispatch(postUser(response.data.userId, response.data.status))
         })
     }
 }
 
 export const getUserTC = () => {
     return (dispatch: Dispatch, getState: () => AppStateType) => {
-        dispatch(setUserInChat('wait', 0))
-        api.getUser(getState().users.userId).then(response => {
-            dispatch(setUserInChat(response.data.status, response.data.chatId))
-        })
+        if (getState().users.isFetching) {
+            dispatch(setUserInChat('wait', 0))
+            api.getUser(getState().users.userId).then(response => {
+                getState().users.isFetching && dispatch(setUserInChat(response.data.status, response.data.chatId))
+            })
+        }
     }
 }
 
