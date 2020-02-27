@@ -23,7 +23,7 @@ export const ChatPage = () => {
     }, [isLoading, chatId]);
 
     useEffect(() => {
-        setTimeout(() => ref.current.scrollToEnd(), 100)
+        ref.current && setTimeout(() => ref.current.scrollToEnd(), 100)
     }, [messages])
 
     const sendMessage = () => {

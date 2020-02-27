@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         color: 'white',
         borderBottomColor: '#062170',
         borderBottomWidth: 1,
-        height: '100%',
         fontSize: 22,
         textAlign: 'right',
         paddingRight: 10,
@@ -30,11 +29,9 @@ const styles = StyleSheet.create({
         color: 'black',
         borderBottomColor: '#062170',
         borderBottomWidth: 1,
-        height: '100%',
         fontSize: 22,
         textAlign: 'left',
         paddingLeft: 10,
         paddingBottom: 5
-
     }
 })
