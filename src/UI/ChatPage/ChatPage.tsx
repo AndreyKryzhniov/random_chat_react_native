@@ -33,7 +33,12 @@ export const ChatPage = () => {
     }, [isLoading, chatId]);
 
     useEffect(() => {
-        setTimeout(() => ref.current && ref.current.scrollToEnd(), 100)
+        setTimeout(() => {
+            ref.current && ref.current.scrollToEnd()
+            setTimeout(() => {
+                ref.current && ref.current.scrollToEnd()
+            }, 200)
+        }, 200)
     }, [messages])
 
     const sendMessage = () => {
@@ -46,47 +51,49 @@ export const ChatPage = () => {
     }
 
     return (
-        <KeyboardAvoidingView behavior="padding" enabled>
-            <View  style={styles.container}><View style={styles.button_out}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={120}>
+            <View style={styles.button_out}>
                 <Button title={'UOT'} onPress={logOutOfChat} color={'#0D58A6'}/>
             </View>
-                <View style={styles.list}>
-                    <FlatList
-                        ref={ref}
-                        keyExtractor={(item, index) => index.toString()}
-                        data={messages}
-                        renderItem={(item) => <Message messageObj={item} userId={userId}/>}
-                    />
-                </View>
-                <View style={styles.footer}>
-                    <TextInput
-                        style={styles.input}
-                        value={value}
-                        placeholder={'Введите сообщение...'}
-                        onChangeText={setValue}/>
-                    <Button title={'SEND'} onPress={sendMessage} color={'#0D58A6'}/>
-                </View></View>
+            <View style={styles.list}>
+                <FlatList
+                    ref={ref}
+                    keyExtractor={(item, index) => index.toString()}
+                    data={messages}
+                    renderItem={(item) => <Message messageObj={item} userId={userId}/>}
+                />
+            </View>
+            <View style={styles.footer}>
+
+                <TextInput
+                    style={styles.input}
+                    value={value}
+                    placeholder={'Введите сообщение...'}
+                    onChangeText={setValue}/>
+                <Button title={'SEND'} onPress={sendMessage} color={'#0D58A6'}/>
+            </View>
         </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'space-between',
+        // justifyContent: 'space-around',
         alignItems: 'center',
         width: '100%',
         height: '100%'
     },
     button_out: {
-        marginTop: 25,
-        width: '40%'
+        marginTop: 35,
+        width: '40%',
+        marginBottom: 25
     },
     footer: {
+        marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '90%',
-        marginBottom: 10
     },
     input: {
         width: '80%',
@@ -94,7 +101,6 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderBottomWidth: 2,
         borderBottomColor: '#3949ab',
-        marginRight: 10
     },
     list: {
         height: '80%',
